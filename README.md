@@ -5,4 +5,5 @@ A simple demo repository to work with during Udemy Course
 At this repo im testing different git commands. 
 
 ## Testing
-Im adding some text to test git merging
+Im adding some text to test git merging. 
+This line wass added after creating new branch
