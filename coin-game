@@ -56,7 +56,7 @@ Player.prototype.coinGame = function(promoType){
 }
 
 
-var johnPlayCoinGame = john.coinGame(noPromo);
+var johnPlayCoinGame = john.coinGame();
 
 
 //Play game as John (bet value, heads or tails) 
