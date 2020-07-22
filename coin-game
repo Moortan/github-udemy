@@ -11,12 +11,13 @@ var john = new Player(001, 'John', 'Doe', 100);
 
 console.log('Your balance: ' + john.wallet);
 
-//win 2x more if u bet at least 5$
+
 
 function noPromo(item){
   return item;
 }
 
+//win 2x more if u bet at least 5$
 function doubleUp(item){
     if (item >= 5){
         return item * 2;
