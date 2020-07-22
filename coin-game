@@ -11,12 +11,6 @@ var john = new Player(001, 'John', 'Doe', 100);
 
 console.log('Your balance: ' + john.wallet);
 
-
-
-function noPromo(item){
-  return item;
-}
-
 //win 2x more if u bet at least 5$
 function doubleUp(item){
     if (item >= 5){
@@ -27,6 +21,8 @@ function doubleUp(item){
 }
 
 Player.prototype.coinGame = function(promoType){
+   
+    promoType = promoType || function(item){ return item;};
     
     var isWin = false,
         flippedCoin = Math.round(Math.random())
