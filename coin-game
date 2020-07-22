@@ -12,6 +12,11 @@ var john = new Player(001, 'John', 'Doe', 100);
 console.log('Your balance: ' + john.wallet);
 
 //win 2x more if u bet at least 5$
+
+function noPromo(item){
+  return item;
+}
+
 function doubleUp(item){
     if (item >= 5){
         return item * 2;
@@ -54,15 +59,18 @@ Player.prototype.coinGame = function(promoType){
 }
 
 
-var johnPlayCoinGame = john.coinGame(doubleUp);
+var johnPlayCoinGame = john.coinGame(noPromo);
 
 
 //Play game as John (bet value, heads or tails) 
 johnPlayCoinGame(50, 1);
+console.log('Your balance: ' + john.wallet);
+johnPlayCoinGame(25, 0);
 
 
 console.log('Your balance: ' + john.wallet);
 console.log('---------------------------------');
+
 
 
 
