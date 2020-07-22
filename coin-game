@@ -8,7 +8,8 @@ function Player(playerID, firstname, lastname, wallet){
 
 var john = new Player(001, 'John', 'Doe', 100);
 
-console.log(john.wallet);
+
+console.log('Your balance: ' + john.wallet);
 
 //win 2x more if u bet at least 5$
 function doubleUp(item){
@@ -28,10 +29,13 @@ Player.prototype.coinGame = function(promoType){
     
     return function flipCoin(betValue, myBet){
         
-        if (betValue >= self.wallet){
+        if (betValue > self.wallet){
             console.log('Not enough bankroll')
             return;
         }
+        
+        
+        console.log('Coin has flipped: ' + flippedCoin + ' and your bet was: ' + myBet);
         
         if (myBet === flippedCoin){
             
@@ -39,7 +43,7 @@ Player.prototype.coinGame = function(promoType){
             
             var prize = promoType(betValue);
             
-            console.log('Congrats, you won!' + prize + '$ will be added to your wallet');;            
+            console.log('Congrats, you won! ' + prize + '$ will be added to your wallet');;            
             return self.wallet += prize;
             
         }else {
@@ -50,6 +54,16 @@ Player.prototype.coinGame = function(promoType){
 }
 
 
-var playCoinGame = john.coinGame(doubleUp);
-playCoinGame(50, 1);
-console.log(john.wallet);
+var johnPlayCoinGame = john.coinGame(doubleUp);
+
+
+//Play game as John (bet value, heads or tails) 
+johnPlayCoinGame(50, 1);
+
+
+console.log('Your balance: ' + john.wallet);
+
+
+
+
+
