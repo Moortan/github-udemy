@@ -1,0 +1,55 @@
+function Player(playerID, firstname, lastname, wallet){
+    
+    this.playerID = playerID,
+    this.firstname = firstname,
+    this.lastname = lastname,
+    this.wallet = wallet
+}
+
+var john = new Player(001, 'John', 'Doe', 100);
+
+console.log(john.wallet);
+
+//win 2x more if u bet at least 5$
+function doubleUp(item){
+    if (item >= 5){
+        return item * 2;
+    }else {
+        return item; 
+    }
+}
+
+Player.prototype.coinGame = function(promoType){
+    
+    var isWin = false,
+        flippedCoin = Math.round(Math.random())
+    
+    self = this;    
+    
+    return function flipCoin(betValue, myBet){
+        
+        if (betValue >= self.wallet){
+            console.log('Not enough bankroll')
+            return;
+        }
+        
+        if (myBet === flippedCoin){
+            
+            isWin = true;
+            
+            var prize = promoType(betValue);
+            
+            console.log('Congrats, you won!' + prize + '$ will be added to your wallet');;            
+            return self.wallet += prize;
+            
+        }else {
+            console.log('Not this time. Try again');
+            return self.wallet -= betValue;
+        }
+    }
+}
+
+
+var playCoinGame = john.coinGame(doubleUp);
+playCoinGame(50, 1);
+console.log(john.wallet);
