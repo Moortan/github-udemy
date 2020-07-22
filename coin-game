@@ -62,6 +62,8 @@ johnPlayCoinGame(50, 1);
 
 
 console.log('Your balance: ' + john.wallet);
+console.log('---------------------------------');
+
 
 
 
