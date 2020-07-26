@@ -1,8 +1,8 @@
-var player = function(Id, firstname, lastname, wallet){
-  var playerId =  Id;
-  var playerFirstName = firstname;
-  var playerLastName = lastname;
-  var playerWallet = wallet;
+var player = function(id, firstname, lastname, wallet){
+  var id =  id;
+  var firstName = firstname;
+  var lastName = lastname;
+  var wallet = wallet;
   return function(promoType){
  
       promoType = promoType || function(item){ return item;};
@@ -12,13 +12,13 @@ var player = function(Id, firstname, lastname, wallet){
       return {
           flipCoin: function (betValue, myBet){
       
-          console.log('Your balance: ' + playerWallet);
+          console.log('Your balance: ' + wallet);
 
 
           var flippedCoin = Math.round(Math.random());
 
     
-          if (betValue > playerWallet){
+          if (betValue > wallet){
               console.log('Not enough bankroll')
               return;
           }
@@ -32,14 +32,14 @@ var player = function(Id, firstname, lastname, wallet){
               var prize = promoType(betValue);
           
               console.log('Congrats, you won! ' + prize + '$ will be added to your wallet');;            
-              playerWallet += prize;
-              console.log('Your balance: ' +  playerWallet);
+              wallet += prize;
+              console.log('Your balance: ' +  wallet);
 
           }else {
           
               console.log('Not this time. Try again');
-              playerWallet -= betValue;
-              console.log('Your balance: ' +  playerWallet);
+              wallet -= betValue;
+              console.log('Your balance: ' +  wallet);
           }
         }
       }
