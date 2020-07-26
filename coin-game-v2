@@ -1,50 +1,50 @@
 var player = {
-    Id: 'default',
-    firstname: 'default',
-    lastname: 'default',
-    wallet: 0,
-    coinGame: function(promoType){
-   
-        promoType = promoType || function(item){ return item;};
+  Id: 'default',
+  firstname: 'default',
+  lastname: 'default',
+  wallet: 0,
+  coinGame: function(promoType){
+ 
+      promoType = promoType || function(item){ return item;};
+  
+      var isWin = false;
     
-        var isWin = false;
+      var self = this;    
+  
+      return function flipCoin(betValue, myBet){
       
-        self = this;    
+          var flippedCoin = Math.round(Math.random());
+
     
-        return function flipCoin(betValue, myBet){
-        
-            var flippedCoin = Math.round(Math.random());
-
+          if (betValue > self.wallet){
+              console.log('Not enough bankroll')
+              return;
+          }
+     
+          console.log('Coin has flipped: ' + flippedCoin + ' and your bet was: ' + myBet);
       
-            if (betValue > self.wallet){
-                console.log('Not enough bankroll')
-                return;
-            }
-       
-            console.log('Coin has flipped: ' + flippedCoin + ' and your bet was: ' + myBet);
-        
-            if (myBet === flippedCoin){
-            
-                isWin = true;
-            
-                var prize = promoType(betValue);
-            
-                console.log('Congrats, you won! ' + prize + '$ will be added to your wallet');;            
-                self.wallet += prize;
-                console.log('Your balance: ' + self.wallet);
+          if (myBet === flippedCoin){
+          
+              isWin = true;
+          
+              var prize = promoType(betValue);
+          
+              console.log('Congrats, you won! ' + prize + '$ will be added to your wallet');;            
+              self.wallet += prize;
+              console.log('Your balance: ' + self.wallet);
 
-            }else {
-            
-                console.log('Not this time. Try again');
-                self.wallet -= betValue;
-                console.log('Your balance: ' + self.wallet);
-            }
-        }
-    }
+          }else {
+          
+              console.log('Not this time. Try again');
+              self.wallet -= betValue;
+              console.log('Your balance: ' + self.wallet);
+          }
+      }
+  }
 }
 
 var jane = Object.create(player);
-jane.Id = 001;
+jane.Id = 1;
 jane.firstname = 'Jane';
 jane.lastname = 'Doe';
 jane.wallet = 1000;
@@ -53,11 +53,11 @@ console.log('Your balance: ' + jane.wallet);
 
 //win 2x more if u bet at least 5$
 function doubleIt(item){
-    if (item >= 5){
-        return item * 2;
-    }else {
-        return item; 
-    }
+  if (item >= 5){
+      return item * 2;
+  }else {
+      return item; 
+  }
 }
 
 
