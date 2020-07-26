@@ -1,0 +1,72 @@
+var player = function(Id, firstname, lastname, wallet){
+  var playerId =  Id;
+  var playerFirstName = firstname;
+  var playerLastName = lastname;
+  var playerWallet = wallet;
+  return function(promoType){
+ 
+      promoType = promoType || function(item){ return item;};
+  
+      var isWin = false;  
+  
+      return {
+          flipCoin: function (betValue, myBet){
+      
+          console.log('Your balance: ' + playerWallet);
+
+
+          var flippedCoin = Math.round(Math.random());
+
+    
+          if (betValue > playerWallet){
+              console.log('Not enough bankroll')
+              return;
+          }
+     
+          console.log('Coin has flipped: ' + flippedCoin + ' and your bet was: ' + myBet);
+      
+          if (myBet === flippedCoin){
+          
+              isWin = true;
+          
+              var prize = promoType(betValue);
+          
+              console.log('Congrats, you won! ' + prize + '$ will be added to your wallet');;            
+              playerWallet += prize;
+              console.log('Your balance: ' +  playerWallet);
+
+          }else {
+          
+              console.log('Not this time. Try again');
+              playerWallet -= betValue;
+              console.log('Your balance: ' +  playerWallet);
+          }
+        }
+      }
+  }
+}
+
+
+//win 2x more if u bet at least 5$
+function doubleIt(item){
+  if (item >= 5){
+      return item * 2;
+  }else {
+      return item; 
+  }
+}
+
+
+var janePlayCoinGame = player(1, 'Jane', 'Doe', 1000);
+var johnPlayCoinGame = player(2, 'John', 'Doe', 500)
+
+//Play game as Jane (bet value, heads or tails) 
+janePlayCoinGame().flipCoin(50, 1);
+janePlayCoinGame().flipCoin(50, 1);
+
+console.log('---------------------------------');
+
+johnPlayCoinGame(doubleIt).flipCoin(100,0);
+johnPlayCoinGame(doubleIt).flipCoin(100,0);
+
+console.log('---------------------------------');
