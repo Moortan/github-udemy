@@ -58,16 +58,16 @@ function doubleIt(item){
 }
 
 
-var janePlayCoinGame = player(1, 'Jane', 'Doe', 1000);
-var johnPlayCoinGame = player(2, 'John', 'Doe', 500)
+var janePlayGame = player(1, 'Jane', 'Doe', 1000);
+var johnPlayGame = player(2, 'John', 'Doe', 500)
 
 //Play game as Jane (bet value, heads or tails) 
-janePlayCoinGame().flipCoin(50, 1);
-janePlayCoinGame().flipCoin(50, 1);
+janePlayGame().flipCoin(50, 1);
+janePlayGame().flipCoin(50, 1);
 
 console.log('---------------------------------');
 
-johnPlayCoinGame(doubleIt).flipCoin(100,0);
-johnPlayCoinGame(doubleIt).flipCoin(100,0);
+johnPlayGame(doubleIt).flipCoin(100,0);
+johnPlayGame(doubleIt).flipCoin(100,0);
 
 console.log('---------------------------------');
