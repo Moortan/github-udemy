@@ -1,13 +1,37 @@
+import "./styles.css";
+
+document.getElementById("app").innerHTML = `
+<h1>Hello Vanilla!</h1>
+<div>
+  We use the same configuration as Parcel to bundle this sandbox, you can find more
+  info about Parcel 
+  <a href="https://parceljs.org" target="_blank" rel="noopener noreferrer">here</a>.
+</div>
+`;
 var player = function(id, firstname, lastname, wallet){
-  var id =  id;
-  var firstName = firstname;
-  var lastName = lastname;
-  var wallet = wallet;
+  var id =  id,
+      firstName = firstname,
+      lastName = lastname,
+      wallet = wallet;
+      
   return function(promoType){
  
       promoType = promoType || function(item){ return item;};
-  
-      var isWin = false;  
+      
+      function hasWon(betValue){
+        var prize = promoType(betValue);
+          
+        wallet += prize;
+
+        console.log('Congrats, you won! ' + prize + '$ will be added to your wallet');
+        console.log('Your balance: ' +  wallet);
+      }
+
+      function hasLost(betValue){
+        wallet -= betValue;
+        console.log('Not this time. Try again');
+        console.log('Your balance: ' +  wallet);
+      }
   
       return {
           flipCoin: function (betValue, myBet){
@@ -24,24 +48,11 @@ var player = function(id, firstname, lastname, wallet){
           }
      
           console.log('Coin has flipped: ' + flippedCoin + ' and your bet was: ' + myBet);
-      
-          if (myBet === flippedCoin){
           
-              isWin = true;
-          
-              var prize = promoType(betValue);
-          
-              console.log('Congrats, you won! ' + prize + '$ will be added to your wallet');;            
-              wallet += prize;
-              console.log('Your balance: ' +  wallet);
+         //check if player won  
+          myBet === flippedCoin ? hasWon(betValue) : hasLost(betValue);
+        },
 
-          }else {
-          
-              console.log('Not this time. Try again');
-              wallet -= betValue;
-              console.log('Your balance: ' +  wallet);
-          }
-        }
       }
   }
 }
