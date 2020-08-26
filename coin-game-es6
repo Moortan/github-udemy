@@ -1,0 +1,60 @@
+class Player{
+  constructor(id, firstname, lastname, wallet){
+    this.id = id;
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.wallet = wallet;
+  }
+  
+  coinGame(promoType = x => x){
+      
+      return (betValue, myBet) => {
+      
+          const flippedCoin = Math.round(Math.random());
+
+    
+          if (betValue > this.wallet){
+              console.log(`Not enough bankroll`)
+              return;
+          }
+          
+          console.log(`Coin has flipped ${flippedCoin} and your bet was ${myBet}`);
+      
+          if (myBet === flippedCoin){
+                  
+              var prize = promoType(betValue);
+          
+              console.log(`Congrats, you won! ${prize} $ will be added to your wallet`);;           
+              this.wallet += prize;
+              console.log(`Your balance: ${this.wallet}`);
+
+          }else {
+          
+              console.log(`Not this time. Try again`);
+              this.wallet -= betValue;
+              console.log(`Your balance: ${this.wallet}`);
+          }
+      }
+  }
+}
+
+//win 2x more if u bet at least 5$
+function doubleIt(item){
+  if (item >= 5){
+      return item * 2;
+  }else {
+      return item; 
+  }
+}
+
+
+let jane = new Player(1, 'Jane', 'Doe', 200)
+let janePlayCoinGame = jane.coinGame();
+
+
+console.log(`Your balance: ${jane.wallet}`);
+
+//Play game as Jane (bet value, heads or tails) 
+janePlayCoinGame(50, 1);
+janePlayCoinGame(50, 0);
+console.log('---------------------------------');
